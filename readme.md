@@ -69,7 +69,7 @@ Uso de **ProblemDetail** com erros semânticos:
 ## 📋 Como Executar
 
 ```bash
-git clone https://github.com/eduardosimass/Wallet
+git clone https://github.com/eduardosimass/wallet-api
 docker-compose up -d
 ./mvnw spring-boot:run
 ```
