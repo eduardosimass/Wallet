@@ -1,101 +1,39 @@
-# 💸 Wallet API — Sistema de Pagamentos P2P com Alta Concorrência
+# Wallet API — High-Concurrency P2P Payments
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Kafka](https://img.shields.io/badge/Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
+API REST backend para gerenciamento de carteiras digitais e transferências P2P com foco em consistência, concorrência e boas práticas de engenharia.
 
-API backend para gerenciamento de **carteiras digitais** e **transferências financeiras P2P**, projetada para simular cenários reais de uma fintech.
+## 🔧 Tecnologias
 
-O foco do projeto é resolver problemas **críticos de sistemas financeiros**, como:
-
-- Prevenção de **double spending**
-- Controle de **concorrência em alto volume**
-- Eliminação de **deadlocks**
-- Consistência transacional forte
-
-Tudo isso priorizando **clareza arquitetural**, **resiliência** e **boas práticas de engenharia**.
+**Backend:** Java 17, Spring Boot 3  
+**DB:** PostgreSQL  
+**Mensageria:** Apache Kafka  
+**Testes:** JUnit 5, Mockito  
+**Containerização:** Docker / Docker Compose  
+**Documentação:** Swagger / OpenAPI  
 
 ---
 
-## 🛠️ Tecnologias e Ferramentas
+## 🚀 Funcionalidades
 
-- Java 17 + Spring Boot 3  
-- PostgreSQL  
-- Apache Kafka  
-- Spring Data JPA (Locks pessimistas)  
-- Docker & Docker Compose  
-- Swagger / OpenAPI 3  
-- JUnit 5 & Mockito  
+- Transferências P2P com lock pessimista  
+- Estratégia anti-deadlock  
+- Tratamento de erros semanticamente correto  
+- Endpoints seguros e validados  
+- Documentação interativa via Swagger
 
 ---
 
-## 🚀 Diferenciais Técnicos (O *Porquê*)
+## 🧠 Destaques de Engenharia
 
-### 1️⃣ Consistência de Dados com Pessimistic Locking
-
-Durante uma transferência, o saldo da carteira é protegido com `PESSIMISTIC_WRITE`, impedindo alterações simultâneas.
-
-✔ Evita Lost Update  
-✔ Impede double spending  
-✔ Garante atomicidade  
+✔ Consistência de dados com `PESSIMISTIC_WRITE`  
+✔ Deadlock evitado por ordenação de locks  
+✔ Arquitetura orientada a eventos (Kafka)  
+✔ Tratamento de exceções com ProblemDetails (RFC 7807)
 
 ---
 
-### 2️⃣ Estratégia Anti-Deadlock (Lock Ordering)
+## 📦 Executando o Projeto
 
-Os IDs das carteiras são ordenados antes do lock.  
-O sistema sempre bloqueia primeiro o menor ID.
-
-✔ Deadlock impossível por construção  
-
----
-
-### 3️⃣ Arquitetura Orientada a Eventos
-
-Após a transferência, um evento é publicado no Kafka para notificação.
-
-✔ Alta performance  
-✔ Desacoplamento  
-✔ Resiliência  
-
----
-
-### 4️⃣ Tratamento de Erros (RFC 7807)
-
-Uso de **ProblemDetail** com erros semânticos:
-
-- 400 — Requisição inválida  
-- 404 — Não encontrado  
-- 422 — Regra de negócio  
-
----
-
-## 📋 Como Executar
-
+🔹 Clone o repositório  
 ```bash
-git clone https://github.com/eduardosimass/wallet-api
-docker-compose up -d
-./mvnw spring-boot:run
-```
-
-Swagger:
-```
-http://localhost:8080/swagger-ui.html
-```
-
----
-
-## 🧪 Testes
-
-```bash
-./mvnw test
-```
-
----
-
-## 👨‍💻 Autor
-
-Eduardo Simas  
-Engenheiro de Software focado em sistemas escaláveis e arquitetura backend.
+git clone https://github.com/eduardosimass/wallet-api.git
